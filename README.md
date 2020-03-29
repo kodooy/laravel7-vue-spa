@@ -7,7 +7,7 @@ It includes Vue components for all default laravel auth views (eg. Login, Regist
 This boilerplate includes:
 
 - Laravel 7
-- Laravel Airlock
+- Laravel Sanctum
 - VueJs 2.5.*
 - Vue Router
 - Vuex
@@ -26,9 +26,9 @@ Copy .env file and fill it out (database, mail)
 
 ```cp .env.example .env```
 
-**It is important** to set ```AIRLOCK_STATEFUL_DOMAINS``` in .env
+**It is important** to set ```SANCTUM_STATEFUL_DOMAINS``` in .env
 
-```AIRLOCK_STATEFUL_DOMAINS="yourdomain.com"```
+```SANCTUM_STATEFUL_DOMAINS="yourdomain.com"```
 
 Generate key
 

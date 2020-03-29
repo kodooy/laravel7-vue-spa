@@ -24,13 +24,14 @@ export default {
 
     login ({dispatch}, credentials) {
       return new Promise((resolve, reject) => {
-        axios.get('/airlock/csrf-cookie').then(() => {
+        axios.get('/sanctum/csrf-cookie').then(() => {
           axios.post('/login', credentials)
             .then(() => {
-              axios.get('/api/user').then(response => {
-                dispatch('setAuthUser', response.data)
-                resolve()
-              })
+              axios.get('/api/user')
+                .then(response => {
+                  dispatch('setAuthUser', response.data)
+                  resolve()
+                })
             })
             .catch(error => {
               reject(error.response.data.errors)
@@ -41,7 +42,7 @@ export default {
 
     register ({dispatch}, data) {
       return new Promise((resolve, reject) => {
-        axios.get('/airlock/csrf-cookie').then(() => {
+        axios.get('/sanctum/csrf-cookie').then(() => {
           axios.post('/register', data).then(() => {
             axios.get('/api/user').then(response => {
               dispatch('setAuthUser', response.data)
@@ -56,7 +57,7 @@ export default {
 
     sendResetLinkEmail ({}, email) {
       return new Promise ((resolve, reject) => {
-        axios.get('/airlock/csrf-cookie').then(() => {
+        axios.get('/sanctum/csrf-cookie').then(() => {
           axios.post('/password/email', email)
             .then(response => {
               resolve(response.data.message)
@@ -69,7 +70,7 @@ export default {
 
     passwordReset ({dispatch}, credentials) {
       return new Promise ((resolve, reject) => {
-        axios.get('/airlock/csrf-cookie').then(() => {
+        axios.get('/sanctum/csrf-cookie').then(() => {
           axios.post('/password/reset', credentials)
             .then(() => {
               axios.get('/api/user').then(response => {
@@ -97,7 +98,7 @@ export default {
 
     passwordChange ({}, password) {
       return new Promise ((resolve, reject) => {
-        axios.get('/airlock/csrf-cookie').then(() => {
+        axios.get('/sanctum/csrf-cookie').then(() => {
           axios.put('/password', password)
             .then(response => {
               resolve(response.data)
